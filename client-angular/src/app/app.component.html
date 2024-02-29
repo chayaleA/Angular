@@ -1,0 +1,52 @@
+<div class="container">
+  <br>
+  <b>{{time()}}</b>
+  <br>
+  <br>
+  <app-observable-demo></app-observable-demo>
+  
+  <h1 class="blockquote text-center" class="display-1" style="text-align: center;"> <b>{{title}}</b></h1>
+
+  <br>
+
+  <ul>
+    <li>
+      <a routerLink="/home">Home Page</a>
+    </li>
+
+    <li>
+      <a routerLink="/students">Student page</a>
+    </li>
+
+    <li>
+      <a routerLink="/students_details">Student details</a>
+    </li>
+
+    <li>
+      <a routerLink="/settings">Settings</a>
+    </li>
+
+    <li>
+      <a routerLink="/demo/directives">Link to Directive demo</a>
+    </li>
+  </ul>
+  <!-- <app-list-students></app-list-students> -->
+
+  <router-outlet></router-outlet>
+
+  <!-- sticky-button.component.html -->
+  <button mat-fab color="primary" style="position: fixed;  bottom: 20px;
+         right: 20px;font-size: 1.5rem;
+         width: 100px;
+         height: 100px; 
+         border-radius: 50%;;" (click)="onClick()">
+    Send email
+  </button>
+
+
+
+  <!-- delete it -->
+  <!-- <br>
+  showParentLife: <input  [(ngModel)] = "showParentLife" type="checkbox"/>
+  <app-parent-life [x]=7 *ngIf="showParentLife"></app-parent-life> -->
+</div>

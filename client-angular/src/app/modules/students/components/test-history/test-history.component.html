@@ -1,0 +1,17 @@
+<ul class="list-group list-group-horizontal">
+    <div class="col-1" *ngIf="average">averageMark: {{average}}</div>
+    <li *ngFor="let test of testsArr" class="list-group-item" style="background-color:chartreuse;">
+        <div>
+            <div>
+                test: {{test.nameOfTest}}
+            </div>
+            <div>
+                mark:{{test.mark}}
+            </div>
+            <div>
+                kode test:{{test.kode}}
+            </div>
+        </div>
+    </li>
+   
+</ul>

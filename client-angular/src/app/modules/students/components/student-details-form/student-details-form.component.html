@@ -1,0 +1,113 @@
+<div class="card" *ngIf="student.id else noStudent">
+    <div class="card-body">
+        Student details:
+        <form [formGroup]="MyformGroup">
+            <div class="form-group">
+                <br>
+                <label for="firstName">first name:</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                <ng-container *ngIf="MyformGroup.controls['firstName'].errors">
+                    <div class="alert alert-danger" *ngIf="MyformGroup.controls['firstName'].errors['minlength']">
+                        You must enter 3 characters at least
+                    </div>
+                    <div class="alert alert-danger" *ngIf="MyformGroup.controls['firstName'].errors['required']">
+                        This field is required
+                    </div>
+                </ng-container>
+            </div>
+            <div class="form-group">
+                <label for="last name">last name:</label>
+                <input type="text" class="form-control" id="last name" formControlName="lastname">
+                <ng-container *ngIf="MyformGroup.controls['lastname'].errors">
+                    <div class="alert alert-danger" *ngIf="MyformGroup.controls['lastname'].errors['required']">
+                        This field is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="MyformGroup.controls['lastname'].errors['maxlength']">
+                        You must enter 10 characters at most
+                    </div>
+                </ng-container>
+            </div>
+            <div class="form-group">
+                <label for="id">id:</label>
+                <input type="number" class="form-control" id="id" formControlName="id">
+            </div>
+            <div class="form-group">
+                <label for="address">address:</label>
+                <input type="text" class="form-control" id="address" formControlName="address">
+            </div>
+            <div class="form-group">
+                <label for="phone">phone:</label>
+                <input type="text" class="form-control" id="phone" formControlName="phone">
+            </div>
+            <div class="form-group">
+                <label for="active">active:</label>
+                <input type="text" class="form-control" id="active" formControlName="active">
+            </div>
+            <div class="form-group">
+                <label for="averageMark">average mark:</label>
+                <input type="number" class="form-control" id="averageMark" formControlName="averageMark">
+            </div>
+            <div *ngIf="student.active == false">
+                <label for="departureDate">departureDate:</label>
+                <input type="date" class="form-control" id="departureDate" formControlName="departureDate">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input (focus)="focusEvent()" type="text" class="form-control" id="description"
+                    formControlName="description">
+            </div>
+
+            <br>
+            <div class="form-group">
+                <label for="CoursesId">Courses</label>
+                <select formControlName="courseId" class="form-control">
+                    <option *ngFor="let course of coursesList" value="{{course.id}}">{{course.courseName}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="year_school">year school:</label>
+                <br>
+                <input type="radio" name="year_school" [value]="year_schoolType.first_year"
+                    formControlName="year_school" />A
+                <br>
+                <input type="radio" name="year_school" [value]="year_schoolType.second_year"
+                    formControlName="year_school" />B
+                <br>
+                <input type="radio" name="year_school" [value]="year_schoolType.third_year"
+                    formControlName="year_school" />C
+            </div>
+
+            <div [ngSwitch]="MyformGroup.controls['year_school'].value">
+                <div *ngSwitchCase="year_schoolType.first_year" style="color: red;"> The amount of studie's days are
+                    25000 dayes </div>
+                <div *ngSwitchCase="year_schoolType.second_year" style="color: aqua;"> The amount of studie's days are
+                    35000 dayes </div>
+                <div *ngSwitchCase="year_schoolType.third_year" style="color: blue;"> The amount of studie's days are
+                    45000 dayes </div>
+                <div *ngSwitchDefault>No choose</div>
+            </div>
+            <form>
+                Total absence days {{totalMissingDays}}
+                <br>
+                <label for="fromDate">from Date:</label>
+                <input type="date" id="fromDate" name="fromDate"  [(ngModel)]="missingFromDate">
+                <br>
+                <label for="totalDays">total days:</label>
+                <input type="number"  id="totalDays" name="totalDays" [(ngModel)]="missingDays">
+            </form>
+            <br>
+            <button class="btn btn-danger" (click)="SaveStudent(student)" [disabled]="!MyformGroup.valid">Save</button>
+        </form>
+    </div>
+</div>
+
+<ng-template #noStudent>
+    <div class="card">
+        No student to display
+    </div>
+    <br>
+</ng-template>
+
+<!--if i have time to able to enter marks of tests to new student ant to exis student -->

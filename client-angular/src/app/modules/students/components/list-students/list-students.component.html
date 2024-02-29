@@ -1,0 +1,55 @@
+ 
+ <button routerLink="/home" class="btn btn-success">Back to home page</button>
+ <br>
+ <br>
+ <input type="checkbox" #checkBox (change) = "showActiveStudents(checkBox.checked)"/><b>Show only active students</b>
+ <br>
+ <br>
+ <input type="text" [(ngModel)]="searchText" placeholder="search student by name" (input)="onSearchInputChange()">
+<br>
+
+<ul class="list-group">
+    <li *ngFor="let student of filteredStudents" class="list-group-item" [ngClass]="{'list-group-item-warning': student.averageMark > 90,
+                 'active':selectStudent&&selectStudent.id == student.id,
+                 'list-group-item-success': !student.active}">
+        <div class="row">
+            <div class="col-1">id: {{student.id}}</div>
+            <div class="col-1">first name: {{student.firstName}}</div>
+            <div class="col-1">last name: {{student.lastname}}</div>
+            <div class="col-1">address: {{student.address}}</div>
+            <div class="col-1">phone: {{student.phone}}</div>
+            <div class="col-1">active: {{student.active}}</div>
+            <div class="col-1">sumAbsenceDays: {{days}}</div>
+            <!-- <div class="col-1">mail:: {{student.mail}}</div> -->
+            <app-test-history *ngIf="student.testArr.length > 0" [testsArr] = "student.testArr" [id] = "student.id"></app-test-history>
+            <div class="col-1" *ngIf="student.courseId">course: {{student.courseId}}</div>
+            <div class="col-1" *ngIf="!student.courseId"> {{student.courseId}}</div>
+            <div  class="row">
+                <div>
+                    <br>
+                    <button (click)="showDetails(student)" class="btn btn-danger">Editing details</button>
+                    <br>
+                </div>
+                <div *ngIf="student.id">
+                    <br>
+                    <button  (click)="deleteStudent(student.id)" class="btn btn-danger">Delete student</button>
+                </div>
+            </div>
+           
+        </div>
+    </li>
+</ul>
+<br>
+<div>
+    <button (click)="ShowNewStudent()" class="btn btn-outline-warning">Add new Student</button>
+
+    <!-- <button (click)="saveStudentsToServer()" class="btn btn-success">Save student to server</button> -->
+</div>
+
+<br>
+<br>
+
+<!-- <app-student-details-form [student]="selectStudent" (onSaveNewStudent)="AddNewStudentToList($event)"
+    (firstFocus)="showDescription()"></app-student-details-form> -->
+
+<!-- <app-student-details-form (firstFocus)="showDescription()"></app-student-details-form> -->
